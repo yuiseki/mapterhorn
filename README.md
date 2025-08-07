@@ -8,7 +8,7 @@ Open terrain tile sets and data catalog
 
 ## Viewer
 
-https://mapterhorn.com/viewer
+[https://mapterhorn.com/viewer](https://mapterhorn.com/viewer)
 
 ## Sources
 

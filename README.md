@@ -12,8 +12,8 @@ Open terrain tile sets and data catalog
 
 ## Sources
 
-- [Copernicus glo30](./source-catalog/glo30/), 30 m resolution, global
-- [swisstopo swissalti3d](./source-catalog/swissalti3d/), 0.5 m resolution, Switzerland
+- [Copernicus glo30](https://github.com/mapterhorn/mapterhorn/tree/main/source-catalog/glo30), 30 m resolution, global
+- [swisstopo swissalti3d](https://github.com/mapterhorn/mapterhorn/tree/main/source-catalog/swissalti3d), 0.5 m resolution, Switzerland
 
 ## Download
 
@@ -22,9 +22,13 @@ Tiled to web mercator 512 pixel tiles. Terrarium elevation encoding. Webp image 
 - [planet.pmtiles](https://download.mapterhorn.com/planet.pmtiles): 1.43 TB, global coverage, zoom 0 to 12
 - [6-33-22.pmtiles](https://download.mapterhorn.com/6-33-22.pmtiles): 246.2 GB, high resolution coverage in Switzerland zoom 13 to 17
 
+## Code
+
+[https://github.com/mapterhorn/mapterhorn](https://github.com/mapterhorn/mapterhorn)
+
 ## License
 
-Code: BSD-3, see [LICENSE](./LICENSE)
+Code: BSD-3, see [LICENSE](https://github.com/mapterhorn/mapterhorn/blob/main/LICENSE).
 
 Source data:
 - glo30: [source-catalog/glo30/LICENSE.pdf](source-catalog/glo30/LICENSE.pdf)

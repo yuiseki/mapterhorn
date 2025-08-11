@@ -4,7 +4,7 @@
   <img alt="Logo" src="https://mapterhorn.github.io/.github/brand/screen/mapterhorn-logo.png">
 </picture>
 
-Open terrain tile sets and data catalog
+Public terrain tiles for interactive web map visualizations
 
 ## Viewer
 

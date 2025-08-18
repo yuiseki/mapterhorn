@@ -112,7 +112,7 @@ Note on parallelism: the aggregation pipeline is parallelized in all parts, but 
 
 ## Downsampling
 
-The downsampling pipeline creates overviews from the aggregated PMTiles file which contain only data at the local maxzoom. The pipeline has again two parts: **covering** to plan the work, and **create** to execute the work.
+The downsampling pipeline creates overviews from the aggregated PMTiles file which contain only data at the local maxzoom. The pipeline has again two parts: **covering** to plan the work, and **run** to execute the work.
 
 In **covering**, we iterate over zoom levels starting with the highest and going lower down to zero. For a given zoom, we read all aggregation item extents and all previously produced downsampling extents, and simplify them again up to a total downsampling tile width of 64 * 512 = 32768 pixels. For each parent downsampling item we write which children are involved into a file at `aggregation-store/{aggregation_id}/{z}-{x}-{y}-{child_z}-downsampling.csv`. 
 
@@ -125,7 +125,7 @@ filename
 3-1-0-3.pmtiles
 ```
 
-In **create**, we iterate over all downsampling items in descending child zoom order and we first check if the involved aggregation items have changed since the last aggregation. If not, we can skip this item. Else process it as follows:
+In **run**, we iterate over all downsampling items in descending child zoom order and we first check if the involved aggregation items have changed since the last aggregation. If not, we can skip this item. Else process it as follows:
 
 First we create a map from child tile id to pmtiles file by expanding the children of each file. Then, for each parent tile we get the 4 children to fill a 1024 by 1024 float32 array. We half the size to 512 by 512 using 2 by 2 averaging. The tiles are then encoded as terrarium again and written as webp to disk. Then we pack the webps into a pmtiles archive and store it in the pmtiles-store folder with the same file location convention as for aggregation items.
 
@@ -144,4 +144,15 @@ We now bundle these files by creating tile pyramids with multiple zoom levels. I
 
 **6-{x}-{y}.pmtiles** contains all zoom level 13+ children of tile 6-{x}-{y}.
 
-With this convention we can limit the total file size to roughly 1 terabyte assuming that we have a maxzoom of 17 which corresponds to about 0.5 m resolution.\
+With this convention we can limit the total file size to roughly 1 terabyte assuming that we have a maxzoom of 17 which corresponds to about 0.5 m resolution.
+
+## Requirements
+
+- uv: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+- tippecanoe: https://github.com/felt/tippecanoe?tab=readme-ov-file#installation
+- gdal: https://mothergeo-py.readthedocs.io/en/latest/development/how-to/gdal-ubuntu-pkg.html#install-gdal-ogr
+
+## Debug
+
+Run `./debug.sh`. This should download one image of swissalti3d and one of glo30, reproject them to web mercator, aggregate and downsample, and bundle them in two pmtiles files in the bundle store.
+
